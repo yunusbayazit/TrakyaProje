@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">TrakyaDosyaPaylasim</string>
+    <string name="my_button_text">Ayarlar</string>
+    <string name="dosyatxt">Paylaşımlarım</string>
+    <string name="Derslerimtxt">Derslerim</string>
+    <string name="Etkinliktxt">Etkinlik</string>
+    <string name="SoruCevapTxt">Soru-Cevap</string>
+    <string name="banner_alt">Trakya University</string>
+    <string name="AdıText"> Adı :</string>
+    <string name="okulNoText">Okul Numarası: :</string>
+    <string name="soyadText">Soyadı : </string>
+    <string name="emailText">E-Mail :</string>
+    <string name="fakulteText">Fakülte :</string>
+    <string name="SplashText">Trakya Dosya Paylaşım</string>
+    <string name="chcktxt">Beni Hatırla</string>
+    <string-array name="Fakulteler">
+            <item>Muhendislik</item>
+            <item>Fen-Edebiyat</item>
+            <item>İktisadi İdari Birimler</item>
+            <item>Tıp</item>
+            <item>Sağlık Fakültesi</item>
+            <item>Eğitim</item>
+        </string-array>
+    <string-array name="itemBildirim">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+
+    </resources>
+
+
