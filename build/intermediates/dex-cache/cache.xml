@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\yunus\Desktop\TrakyaDosyaPaylasim\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
+        <dex dex="C:\Users\yunus\Desktop\TrakyaDosyaPaylasim\app\build\intermediates\pre-dexed\debug\classes-9ab93c5312f52d2129ef0fe56476129cb162f726.jar" />
+    </item>
+    <item
+        jar="C:\Users\yunus\Desktop\TrakyaDosyaPaylasim\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="C:\Users\yunus\Desktop\TrakyaDosyaPaylasim\app\build\intermediates\pre-dexed\debug\classes-57ae1fe89d8c85d7c81a073ccb74fb66831fa664.jar" />
+    </item>
+
+</items>
