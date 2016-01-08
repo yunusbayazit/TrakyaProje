@@ -10,11 +10,6 @@
     android:title="Preferences" />
 
 <item
-<item
-    android:id="@+id/madpreferences"
-    android:title="Preferences" />
-
-<item
 android:id="@+id/mExit"
 android:title="Cikis" />
     </menu>
