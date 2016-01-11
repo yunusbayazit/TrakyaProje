@@ -1,4 +1,4 @@
-package com.example.yunus.trakyadosyapaylasim;
+package com.example.yunus.trakyadepo;
 
 import org.junit.Test;
 
