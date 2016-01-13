@@ -1,6 +1,10 @@
 package com.example.yunus.trakyadepo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -16,7 +20,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.activeandroid.query.Delete;
 import com.example.yunus.trakyadepo.Adapter.PageAdapter;
+import com.example.yunus.trakyadepo.Model.Auth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,11 +74,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-
-
-
     }
 
     @Override
@@ -81,7 +82,20 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Exit")
+                    .setMessage("Uygulamadan çıkmak istediğinize emin misiniz?")
+                    .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).setNegativeButton("Hayır", null).show();
+
         }
     }
 
@@ -94,18 +108,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.Ayarlar:
+                // Launch settings activity
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                break;
+
+            // more code...
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -119,11 +132,17 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.action_settings) {
-
         } else if (id == R.id.nav_share) {
 
-        } else if (id == 1) {
+        } else if (id == R.id.Ayarlar) {
+            Intent i = new Intent(getBaseContext(), PrefencesActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(i);
+        }
+          else if (id == R.id.cikis) {
+            new Delete().from(Auth.class).execute();
+
+            Intent is = new Intent(this, LoginActivity.class);
+            startActivity(is);
 
         }
 
