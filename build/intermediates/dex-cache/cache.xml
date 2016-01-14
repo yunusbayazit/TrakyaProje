@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\yunus\.gradle\caches\modules-2\files-2.1\com.michaelpardo\activeandroid\3.1.0-SNAPSHOT\4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08\activeandroid-3.1.0-SNAPSHOT.jar"
+        jar="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="4ab7b0182975bc57c49efc5e0b3baa4a10e4ec08">
-        <dex dex="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\pre-dexed\debug\activeandroid-3.1.0-SNAPSHOT-f98b08124aa5dde04853906f46596bc64295f438.jar" />
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\pre-dexed\debug\classes-4df9ffda8e26720080b12066c19c0c9105987cfa.jar" />
     </item>
     <item
-        jar="C:\Users\yunus\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jar="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
-        <dex dex="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1-33655940e3947da1077361ecc269538171e22f09.jar" />
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\pre-dexed\debug\classes-e5be4845bc7a0cf6327fba1c69d0070ad0121031.jar" />
     </item>
 
 </items>

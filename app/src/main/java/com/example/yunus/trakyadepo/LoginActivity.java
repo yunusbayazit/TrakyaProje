@@ -57,9 +57,6 @@ public class LoginActivity extends Activity {
     @Bind(R.id.btngiris)
     Button buttonGiris;
 
-    @Bind(R.id.hatirlachk)
-    CheckBox lgnchck;
-
     @Bind(R.id.email)
     EditText Kullanıcı_Adı;
 
@@ -95,7 +92,7 @@ public class LoginActivity extends Activity {
     @OnClick(R.id.btngiris)
     public void Giris_Click(Button button) {
 
-        if (lgnchck.isChecked()) {
+
             if (Kullanıcı_Adı.getText().toString().equals("Yannis") && (Sifre.getText().toString().equals("123"))) {
 
                 String Kullanıcı_adı = Kullanıcı_Adı.getText().toString();
@@ -112,19 +109,6 @@ public class LoginActivity extends Activity {
                 toast.show();
 
             }
-        } else {
-
-            if (Kullanıcı_Adı.getText().toString().equals("Yannis") && (Sifre.getText().toString().equals("123"))) {
-                Intent intent = new Intent(getBaseContext(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-                startActivity(intent);
-            } else {
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Hatalı Kullanıcı Adı veya Sifre Girdiniz", Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
-        }
     }
 
 

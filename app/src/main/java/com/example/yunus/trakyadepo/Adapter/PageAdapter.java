@@ -1,44 +1,43 @@
 package com.example.yunus.trakyadepo.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.yunus.trakyadepo.onefragment;
-import com.example.yunus.trakyadepo.thirdfragment;
-import com.example.yunus.trakyadepo.twofragment;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by yunus on 11.01.2016.
  */
-public class PageAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+//View Pager fragments setting adapter class
+public class PageAdapter extends FragmentPagerAdapter {
+    private final List<Fragment> mFragmentList = new ArrayList<>();//fragment arraylist
+    private final List<String> mFragmentTitleList = new ArrayList<>();//title arraylist
 
-    public PageAdapter(FragmentManager fm, int NumOfTabs) {
-        super(fm);
-        this.mNumOfTabs = NumOfTabs;
+    public PageAdapter(FragmentManager manager) {
+        super(manager);
     }
 
     @Override
     public Fragment getItem(int position) {
-
-        switch (position) {
-            case 0:
-                onefragment tab1 = new onefragment();
-                return tab1;
-            case 1:
-                twofragment tab2 = new twofragment();
-                return tab2;
-            case 2:
-                thirdfragment tab3 = new thirdfragment();
-                return tab3;
-            default:
-                return null;
-        }
+        return mFragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return mNumOfTabs;
+        return mFragmentList.size();
+    }
+
+
+    //adding fragments and title method
+    public void addFrag(Fragment fragment, String title) {
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mFragmentTitleList.get(position);
     }
 }

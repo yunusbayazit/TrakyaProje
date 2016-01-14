@@ -8,8 +8,11 @@ import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,49 +22,60 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.activeandroid.query.Delete;
 import com.example.yunus.trakyadepo.Adapter.PageAdapter;
+import com.example.yunus.trakyadepo.Fragments.onefragment;
 import com.example.yunus.trakyadepo.Model.Auth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static Toolbar toolbar;
+    private static ViewPager viewPager;
+    private static TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PageAdapter adapter = new PageAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                                               @Override
-                                               public void onTabSelected(TabLayout.Tab tab) {
-                                                   viewPager.setCurrentItem(tab.getPosition());
-                                               }
-
-                                               @Override
-                                               public void onTabUnselected(TabLayout.Tab tab) {
-
-                                               }
-
-                                               @Override
-                                               public void onTabReselected(TabLayout.Tab tab) {
-
-                                               }
-                                           });
-
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);//setting tab over viewpager
+
+        //Implementing tab selected listener over tablayout
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());//setting current selected item over viewpager
+                switch (tab.getPosition()) {
+                    case 0:
+                        Log.e("TAG", "TAB1");
+                        break;
+                    case 1:
+                        Log.e("TAG", "TAB2");
+                        break;
+                    case 2:
+                        Log.e("TAG", "TAB3");
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -73,9 +87,17 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setupTabIcons();
 
     }
 
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_account_balance_white_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_swap_vertical_circle_white_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24dp);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_work_white_24dp);
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -119,6 +141,15 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //Setting View Pager
+    private void setupViewPager(ViewPager viewPager) {
+        PageAdapter adapter = new PageAdapter(getSupportFragmentManager());
+        adapter.addFrag(new onefragment("Paylaşım"), "");
+        adapter.addFrag(new onefragment("Soru-Cevap"), "");
+        adapter.addFrag(new onefragment("Etkinlik"), "");
+        adapter.addFrag(new onefragment("Dosya"), "");
+        viewPager.setAdapter(adapter);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -138,7 +169,7 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(getBaseContext(), PrefencesActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(i);
         }
-          else if (id == R.id.cikis) {
+        else if (id == R.id.cikis) {
             new Delete().from(Auth.class).execute();
 
             Intent is = new Intent(this, LoginActivity.class);
