@@ -14,12 +14,18 @@ import com.example.yunus.trakyadepo.R;
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     TextView title;
+    TextView Ad;
     ImageView image;
+    TextView content;
+    TextView Ders_Adı;
+    TextView LinkTxt;
     public RecyclerViewHolder(View itemView) {
         super(itemView);
-
-        this.title = (TextView) itemView.findViewById(R.id.person_name);
+        this.Ad = (TextView) itemView.findViewById(R.id.PostIsim);
+        this.title = (TextView) itemView.findViewById(R.id.SoruBasliks);
         this.image = (ImageView) itemView.findViewById(R.id.person_photo);
-
+        this.content=(TextView) itemView.findViewById(R.id.Soruiceriks);
+        this.Ders_Adı=(TextView) itemView.findViewById(R.id.Ders_Adı);
+        this.LinkTxt=(TextView) itemView.findViewById(R.id.LinkText);
     }
 }

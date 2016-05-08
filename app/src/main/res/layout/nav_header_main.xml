@@ -9,15 +9,17 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark" android:orientation="vertical"
     android:gravity="bottom">
 
-    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <ImageView android:layout_width="80dp" android:layout_height="80dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon" android:id="@+id/imageView" />
+        android:src="@android:drawable/sym_def_app_icon" android:id="@+id/imageView"
+       />
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing" android:text="ADI SOYADI"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/navbarAd"/>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Okul Numarası" android:id="@+id/textView" />
-
+        android:text="Okul Numarası" android:id="@+id/navbarOkul"
+        android:textSize="10dp"/>
 </LinearLayout>

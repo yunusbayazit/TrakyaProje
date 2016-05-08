@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
+        jar="C:\Users\yunus\Desktop\okull\trakyauniproje\app\build\intermediates\exploded-aar\com.github.dmytrodanylyk\android-morphing-button\98a4986e56\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\pre-dexed\debug\classes-4df9ffda8e26720080b12066c19c0c9105987cfa.jar" />
-    </item>
-    <item
-        jar="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="C:\Users\yunus\Desktop\Trakyadepo\app\build\intermediates\pre-dexed\debug\classes-e5be4845bc7a0cf6327fba1c69d0070ad0121031.jar" />
+        sha1="5244bf01f33c8b895d65f09d14f56a9a559f8c9d">
+        <dex dex="C:\Users\yunus\Desktop\okull\trakyauniproje\app\build\intermediates\pre-dexed\debug\classes-0aa659147e84f3310c0ff8fd8f52f1a392585adc.jar" />
     </item>
 
 </items>

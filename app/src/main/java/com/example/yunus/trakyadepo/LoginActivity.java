@@ -5,8 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +37,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
+import com.example.yunus.trakyadepo.Infrastructure.IOPosts;
+import com.example.yunus.trakyadepo.Infrastructure.IOauth;
+import com.example.yunus.trakyadepo.Infrastructure.Mainapp;
+import com.example.yunus.trakyadepo.Infrastructure.UserPrefs;
+import com.example.yunus.trakyadepo.Infrastructure.userControllerfilter;
+import com.example.yunus.trakyadepo.Infrastructure.ws;
 import com.example.yunus.trakyadepo.Model.Auth;
+import com.example.yunus.trakyadepo.Model.modelauth;
+import com.lacronicus.easydatastorelib.DatastoreBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +53,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -54,6 +67,8 @@ public class LoginActivity extends Activity {
     /**
      * Id to identity READ_CONTACTS permission request.
      */
+    Context context;
+
     @Bind(R.id.btngiris)
     Button buttonGiris;
 
@@ -65,35 +80,66 @@ public class LoginActivity extends Activity {
 
     @Bind(R.id.kytbtn)
     Button buttonKayit;
+    private String userName;
+    private String password;
+
+    ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setupActionBar();
         // Set up the login form.
         ButterKnife.bind(this);
-        new UserLoginTask().execute();
+       // new UserLoginTask().execute();
+        context=this;
 
     }
+
 
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-        }
-    }
 
 
 
     @OnClick(R.id.btngiris)
     public void Giris_Click(Button button) {
+        progress = ProgressDialog.show(this,"",
+                "Lütfen bekleyiniz...", true);
+
+        IOauth service= ws.getws();
+
+        Call<modelauth> control = service.login(new userControllerfilter(Kullanıcı_Adı.getText().toString(),Sifre.getText().toString()));
+
+        control.enqueue(new Callback<modelauth>() {
+            @Override
+            public void onResponse(Response<modelauth> response) {
+
+                if (response.body()==null){
+                    Toast.makeText(context,"Hatalı Kullanıcı Adı veya Şifre Girdiniz",Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    Mainapp.UserPrefs = new DatastoreBuilder(PreferenceManager.getDefaultSharedPreferences(context))
+                            .create(UserPrefs.class);
+                    Mainapp.UserPrefs.LogedInUser().put(response.body());
+                    startActivity(new Intent(context,MainActivity.class));
+                }
+
+                progress.dismiss();
 
 
-            if (Kullanıcı_Adı.getText().toString().equals("Yannis") && (Sifre.getText().toString().equals("123"))) {
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Toast.makeText(context,"bağlantı başarısız...",Toast.LENGTH_SHORT).show();
+                progress.dismiss();
+
+            }
+        });
+
+         /*   if (Kullanıcı_Adı.getText().toString().equals("Yannis") && (Sifre.getText().toString().equals("123"))) {
 
                 String Kullanıcı_adı = Kullanıcı_Adı.getText().toString();
                 int Sifree = Integer.parseInt(Sifre.getText().toString());
@@ -108,7 +154,7 @@ public class LoginActivity extends Activity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Hatalı Kullanıcı Adı veya Sifre Girdiniz", Toast.LENGTH_SHORT);
                 toast.show();
 
-            }
+            } */
     }
 
 
@@ -116,7 +162,7 @@ public class LoginActivity extends Activity {
     @OnClick(R.id.kytbtn)
     public void Kayit_Click(Button button) {
         // This is how you execute a query
-        Select select = new Select();
+      //  Select select = new Select();
 
         // Call select.all() to select all rows from our table which is
         // represented by Person.class and execute the query.
@@ -124,12 +170,12 @@ public class LoginActivity extends Activity {
         // It returns an ArrayList of our Person objects where each object
         // contains data corresponding to a row of our database.
 
-        List<Auth> people = select.all().from(Auth.class).execute();
+       // List<Auth> people = select.all().from(Auth.class).execute();
 
         // Iterate through the ArrayList to get all our data. We ll simply add
         // all the data to our StringBuilder to display it inside a Toast.
 
-        StringBuilder builder = new StringBuilder();
+      /*  StringBuilder builder = new StringBuilder();
         for (Auth person : people) {
             builder.append("Name: ")
                     .append(person.kullanici_adi)
@@ -140,20 +186,21 @@ public class LoginActivity extends Activity {
 
         Toast.makeText(this, builder.toString(), Toast.LENGTH_SHORT).show();
 
-        /*
+        /**/
         Intent intent = new Intent(getBaseContext(), kayitActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
-        */
+
     }
 
 
-    @Override
+   /* @Override
     protected void onRestart() {
         new UserLoginTask().execute();
         super.onRestart();
     }
+    */
 
-    public class UserLoginTask extends AsyncTask<Void, Void, Void> {
+  /*  public class UserLoginTask extends AsyncTask<Void, Void, Void> {
 
 
         ProgressDialog pg = new ProgressDialog(LoginActivity.this);
@@ -197,6 +244,23 @@ public class LoginActivity extends Activity {
 
 
 
+*/
+  public String getPassword() {
+      return Sifre.getText().toString();
+  }
 
+    public void setPassword(String password) {
+        this.password = password;
+        Sifre.setText(password);
+    }
+
+    public String getUserName() {
+        return Kullanıcı_Adı.getText().toString();
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+        Kullanıcı_Adı.setText(userName);
+    }
 }
 

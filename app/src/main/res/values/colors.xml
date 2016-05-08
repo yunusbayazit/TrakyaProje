@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTurkuaz">#CB9832</color>
+    <color name="colorOrange">#243D8F</color>
 </resources>

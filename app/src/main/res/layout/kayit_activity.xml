@@ -10,11 +10,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:textSize="25dp"
+            android:textSize="16dp"
             android:text="@string/AdıText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:textSize="16dp"
+            android:id="@+id/txtOgrenciAdi"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -23,37 +25,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:textSize="25dp"
+            android:textSize="16dp"
             android:text="@string/soyadText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:textSize="25dp"
-            android:text="@string/okulNoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:textSize="25dp"
-            android:text="@string/emailText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
+            android:textSize="16dp"
+            android:id="@+id/txtOgrenciSoyadi"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -65,15 +43,96 @@
 
         <TextView
 
-            android:textSize="25dp"
-            android:text="@string/fakulteText"
+            android:textSize="16dp"
+            android:text="@string/Cinsiyet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/Cinsiyet"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textSize="16dp"
+            android:text="@string/emailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="16dp"
+            android:id="@+id/txtEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textSize="16dp"
+            android:text="@string/parolaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="16dp"
+            android:id="@+id/txtParola"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
+        <TextView
+            android:textSize="16dp"
+            android:text="@string/Bolum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/SpinnerFakulteler"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+
+            android:textSize="16dp"
+            android:text="@string/Sinif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/SpinnerSınıf"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textSize="16dp"
+            android:text="@string/AdresTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="16dp"
+            android:id="@+id/txtAdres"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>

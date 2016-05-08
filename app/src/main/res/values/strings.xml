@@ -25,11 +25,27 @@
         <item>Sağlık Fakültesi</item>
         <item>Eğitim</item>
     </string-array>
+    <string-array name="Cinsiyetler">
+        <item>Erkek</item>
+        <item>Kadın</item>
+
+    </string-array>
+
+
+    <integer-array name="Sınıflar">
+       <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+
+    </integer-array>
     <string-array name="itemBildirim">
         <item>10</item>
         <item>30</item>
         <item>60</item>
     </string-array>
+
     <string name="title_activity_login">Giris Yap</string>
 
     <!-- Strings related to login -->
@@ -46,5 +62,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="Sinif">Sınıfın</string>
+    <string name="Bolum">Bölüm</string>
+    <string name="AdresTxt">Adres</string>
+    <string name="Cinsiyet">Cinsiyet</string>
+    <string name="parolaText">Şifre</string>
 
 </resources>

@@ -1,16 +1,25 @@
 package com.example.yunus.trakyadepo;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,13 +37,25 @@ import android.widget.TextView;
 import com.activeandroid.query.Delete;
 import com.example.yunus.trakyadepo.Adapter.PageAdapter;
 import com.example.yunus.trakyadepo.Fragments.onefragment;
+import com.example.yunus.trakyadepo.Fragments.thirdfragment;
+import com.example.yunus.trakyadepo.Fragments.twofragment;
+import com.example.yunus.trakyadepo.Infrastructure.Mainapp;
 import com.example.yunus.trakyadepo.Model.Auth;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+implements NavigationView.OnNavigationItemSelectedListener {
     private static Toolbar toolbar;
-    private static ViewPager viewPager;
+    public static ViewPager viewPager;
     private static TabLayout tabLayout;
+    private TextView navbarad;
+    private TextView navbarokul;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,38 +65,25 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        navbarad=(TextView) findViewById(R.id.navbarAd);
+        navbarad.setText(Mainapp.UserPrefs.LogedInUser().get().getUserName());
+
+        navbarokul=(TextView) findViewById(R.id.navbarOkul);
+        navbarokul.setText(Mainapp.UserPrefs.LogedInUser().get().getUserType());
+        ImageView navbarimage=(ImageView) findViewById(R.id.imageView);
+        Context context=navbarimage.getContext();
+        Picasso.with(context).load("http://trakyaservice.yunusbayazit.com/img/"+Mainapp.UserPrefs.LogedInUser().get().getUserImage().toString()).placeholder(R.mipmap.ic_launcher).resize(125, 125).centerCrop().into(navbarimage);
+
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);//setting tab over viewpager
 
+
         //Implementing tab selected listener over tablayout
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());//setting current selected item over viewpager
-                switch (tab.getPosition()) {
-                    case 0:
-                        Log.e("TAG", "TAB1");
-                        break;
-                    case 1:
-                        Log.e("TAG", "TAB2");
-                        break;
-                    case 2:
-                        Log.e("TAG", "TAB3");
-                        break;
-                }
-            }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -90,6 +98,8 @@ public class MainActivity extends AppCompatActivity
         setupTabIcons();
 
     }
+
+
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_account_balance_white_24dp);
@@ -125,6 +135,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return true;
     }
 
@@ -135,7 +148,10 @@ public class MainActivity extends AppCompatActivity
                 // Launch settings activity
 
                 break;
-
+            case R.id.ALERT:
+                // Launch settings activity
+                setAlarm();
+                break;
             // more code...
         }
         return true;
@@ -145,8 +161,8 @@ public class MainActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         PageAdapter adapter = new PageAdapter(getSupportFragmentManager());
         adapter.addFrag(new onefragment("Paylaşım"), "");
-        adapter.addFrag(new onefragment("Soru-Cevap"), "");
-        adapter.addFrag(new onefragment("Etkinlik"), "");
+        adapter.addFrag(new twofragment("Soru-Cevap"), "");
+        adapter.addFrag(new thirdfragment("Etkinlik"), "");
         adapter.addFrag(new onefragment("Dosya"), "");
         viewPager.setAdapter(adapter);
     }
@@ -160,6 +176,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.Ana_akis) {
             // Handle the camera action
         } else if (id == R.id.Etkinlik) {
+            Intent i = new Intent(getBaseContext(), DersSecimi.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -170,15 +188,28 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
         }
         else if (id == R.id.cikis) {
-            new Delete().from(Auth.class).execute();
+           /* new Delete().from(Auth.class).execute();
 
             Intent is = new Intent(this, LoginActivity.class);
             startActivity(is);
-
+           */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void setAlarm(){
+
+        Long alertTime = new GregorianCalendar().getTimeInMillis()+5*1000;
+
+        Intent alertIntent = new Intent(this, AlertReceiver.class);
+
+        AlarmManager alarmManager = (AlarmManager)
+                getSystemService(Context.ALARM_SERVICE);
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+    }
+
 }

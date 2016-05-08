@@ -7,8 +7,6 @@ import com.activeandroid.annotation.Table;
 /**
  * Created by yunus on 11.01.2016.
  */
-
-
 @Table(name = "Auth")
 public class Auth extends Model {
 

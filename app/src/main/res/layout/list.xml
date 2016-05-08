@@ -1,12 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="16dp"
-    >
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
     <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cv"
+
         >
 
         <RelativeLayout
@@ -23,26 +24,52 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
                 />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/person_name"
+                android:id="@+id/PostIsim"
                 android:layout_toRightOf="@+id/person_photo"
                 android:layout_alignParentTop="true"
-                android:textSize="30sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/SoruBasliks"
+                android:layout_toRightOf="@+id/person_photo"
+                android:layout_below="@+id/PostIsim"
+                android:textSize="17sp"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/person_age"
+                android:id="@+id/Soruiceriks"
                 android:layout_toRightOf="@+id/person_photo"
-                android:layout_below="@+id/person_name"
+                android:layout_below="@+id/SoruBasliks"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinkText"
+                android:layout_toRightOf="@+id/person_photo"
+                android:layout_below="@+id/Soruiceriks"
+                android:clickable="true"
+                android:autoLink="all"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Ders_Adı"
+                android:gravity="right"
+                android:layout_below="@+id/LinkText"
+                android:layout_toRightOf="@+id/person_photo"
+                android:textStyle="italic"
                 />
 
         </RelativeLayout>
-
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
